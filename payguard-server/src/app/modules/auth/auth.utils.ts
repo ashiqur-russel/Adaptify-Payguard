@@ -15,7 +15,7 @@ export const generateHashedPassword = async (
 
 export const createToken = (
   jwtPayload: {
-    userId: string;
+    email: string;
     role: string;
   },
   secret: string,

@@ -4,6 +4,7 @@ import { User } from '../user/user.model';
 import { TLoginUser } from './auth.interface';
 import httpStatus from 'http-status';
 import { createToken } from './auth.utils';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export const registerUser = async (
   email: string,
@@ -33,7 +34,7 @@ const loginUser = async (payload: TLoginUser) => {
   }
 
   if (await User.isPasswordMatched(password, user.password)) {
-    const jwtPayload = { userId: user.email, role: user.role };
+    const jwtPayload = { email: user.email, role: user.role };
 
     const accessToken = createToken(
       jwtPayload,
@@ -55,4 +56,31 @@ const loginUser = async (payload: TLoginUser) => {
   }
 };
 
-export const AuthServices = { registerUser, loginUser };
+const refreshToken = async (token: string) => {
+  const decoded = jwt.verify(
+    token,
+    config.jwt_refresh_secret as string,
+  ) as JwtPayload;
+
+  const { email } = decoded;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    throw new AppError('User not found!', httpStatus.NOT_FOUND);
+  }
+
+  const jwtPayload = { email: user.email, role: user.role };
+
+  const accessToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    config.jwt_access_secret_expires as string,
+  );
+
+  return {
+    accessToken,
+  };
+};
+
+export const AuthServices = { registerUser, loginUser, refreshToken };
