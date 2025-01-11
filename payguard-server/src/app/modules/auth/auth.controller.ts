@@ -16,16 +16,15 @@ const register = catchAsync(async (req, res) => {
 });
 
 const login = catchAsync(async (req, res) => {
-  const result = await AuthServices.loginUser(req.body);
-  const { email, _id } = result;
+  const { accessToken, refreshToken } = await AuthServices.loginUser(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'User is logged in succesfully!',
     data: {
-      email: email,
-      id: _id,
+      accessToken,
+      refreshToken,
     },
   });
 });

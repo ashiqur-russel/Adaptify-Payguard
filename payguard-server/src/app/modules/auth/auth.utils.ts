@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import config from '../../config';
+import jwt from 'jsonwebtoken';
 
 export const generateHashedPassword = async (
   password: string,
@@ -10,4 +11,15 @@ export const generateHashedPassword = async (
   );
 
   return hashPassword;
+};
+
+export const createToken = (
+  jwtPayload: {
+    userId: string;
+    role: string;
+  },
+  secret: string,
+  expiresIn: string,
+) => {
+  return jwt.sign(jwtPayload, secret, { expiresIn });
 };
