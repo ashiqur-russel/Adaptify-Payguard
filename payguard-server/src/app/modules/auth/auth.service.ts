@@ -11,7 +11,7 @@ export const registerUser = async (
   const newUser = new User({
     email,
     password,
-    role,
+    role: role,
     status: 'pending',
   });
 
