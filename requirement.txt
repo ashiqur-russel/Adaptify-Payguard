@@ -1,0 +1,24 @@
+[X] Initialize Frontend
+[X] Install depeneencies
+[] Create routes and layout
+[] Create Mock json data (optional if backend available or implemented)
+[] Create Components
+[] Fetch data using fecth or axios
+[] Create sidebar
+[] Create payment 
+[] Display data on chart/graph
+
+Backend:
+[] Backen project initialize with supabase, express.js / Mongodb, express
+[] Login, register, authentication, authorization, create user by signup abd save on database table user
+[] document upload by user and save on database table/Collection
+[] verifications status change
+[] Email recieve after verification change by admin
+[] Establish stripe connection
+[] create payment request
+[] update payment request status by admin
+[] user can see his own payment status and lists
+[] admin can see summary of total paments
+[] get all payment history by return date and ammount and status
+[] filter by date and status
+[] make documentation
