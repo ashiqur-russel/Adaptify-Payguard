@@ -1,13 +1,13 @@
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, File } from "lucide-react"; // Use File as fallback
 import { NavLink } from "react-router-dom";
 
 interface SidebarLinkProps {
   to: string;
-  icon: LucideIcon;
+  icon?: LucideIcon;
   label: string;
 }
 
-const SidebarLink = ({ to, icon: Icon, label }: SidebarLinkProps) => {
+const SidebarLink = ({ to, icon: Icon = File, label }: SidebarLinkProps) => {
   return (
     <NavLink
       to={to}

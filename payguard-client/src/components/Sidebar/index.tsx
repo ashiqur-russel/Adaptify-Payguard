@@ -1,13 +1,17 @@
-import { Home, Lock, Settings, User, Users, X } from "lucide-react";
+import { Lock, X } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setIsSidebarCollapsed } from "../../redux/features/globalState";
 import SidebarLink from "../SidebarLink";
+import { adminPaths } from "../../routes/admin.routes";
+import { userPaths } from "../../routes/user.routes";
 
-const Sidebar = () => {
+const Sidebar = ({ role }: { role: "admin" | "user" }) => {
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed
   );
+
+  const paths = role === "admin" ? adminPaths : userPaths;
 
   const siderBarClassName = `fixed flex flex-col h-[100%] justify-between shadow-xl
     transition-transform duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white
@@ -37,7 +41,7 @@ const Sidebar = () => {
         <div className="flex items-center gap-4 border-y-[1.5px] border-gray-200 px-7 py-4 ">
           <div>
             <h3 className="tracking-wide text-md font-bold text-gray-500 dark:text-gray-300">
-              (User Name)
+              {role === "admin" ? <h1>Admin Name</h1> : <h1>User Name</h1>}
             </h3>
             <div className="flex items-start gap-2">
               <Lock
@@ -51,11 +55,14 @@ const Sidebar = () => {
         </div>
 
         <nav className="z-10 w-full">
-          {}
-          <SidebarLink icon={Home} label="Home" to="/" />
-          <SidebarLink icon={Settings} label="Settings" to="/settings" />
-          <SidebarLink icon={User} label="Users" to="/users" />
-          <SidebarLink icon={Users} label="Teams" to="/teams" />
+          {paths.map((path) => (
+            <SidebarLink
+              key={path.path}
+              icon={path.icon}
+              label={path.name || ""}
+              to={path.path}
+            />
+          ))}
         </nav>
       </div>
     </div>

@@ -3,9 +3,10 @@ import Sidebar from "../Sidebar";
 import Navbar from "../Navabar";
 
 const MainLayout = () => {
+  const role = "admin";
   return (
     <div className="flex h-screen">
-      <Sidebar />
+      <Sidebar role={role} />
 
       <div className="flex-1 flex flex-col">
         <Navbar />
