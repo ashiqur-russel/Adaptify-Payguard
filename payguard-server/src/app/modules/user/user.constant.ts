@@ -1,4 +1,10 @@
 export const USER_ROLE = {
-  user: 'user',
-  admin: 'admin',
+  ADMIN: 'admin',
+  USER: 'user',
+} as const;
+
+export const USER_STATUS = {
+  PENDING: 'pending',
+  APPROVED: 'approved',
+  REJECTED: 'rejected',
 } as const;
