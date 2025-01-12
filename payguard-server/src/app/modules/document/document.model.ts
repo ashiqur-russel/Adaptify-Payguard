@@ -1,8 +1,8 @@
 import { Schema, model } from 'mongoose';
-import { DOCUMENT_STATUS } from './document.constant';
 import { IDocument } from './document.interface';
+import { DOCUMENT_STATUS } from './document.constant';
 
-const documentSchema: Schema = new Schema(
+const documentSchema: Schema<IDocument> = new Schema<IDocument>(
   {
     userId: {
       type: Schema.Types.ObjectId,
@@ -16,17 +16,13 @@ const documentSchema: Schema = new Schema(
     status: {
       type: String,
       enum: Object.values(DOCUMENT_STATUS),
-      default: DOCUMENT_STATUS.PENDING,
+      default: DOCUMENT_STATUS.pending,
       required: true,
-    },
-    uploadedAt: {
-      type: Date,
-      default: Date.now,
     },
   },
   {
-    timestamps: false,
+    timestamps: true,
   },
 );
 
-export const Document = model<IDocument>('Document', documentSchema);
+export const UploadDocument = model<IDocument>('Document', documentSchema);

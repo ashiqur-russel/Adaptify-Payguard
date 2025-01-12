@@ -1,5 +1,5 @@
 export const DOCUMENT_STATUS = {
-  PENDING: 'pending',
-  APPROVED: 'approved',
-  REJECTED: 'rejected',
+  pending: 'pending',
+  approved: 'approved',
+  rejected: 'rejected',
 } as const;
